@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premiera</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            gap: 60px;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+        .custom-countdown {
+            display: flex;
+            gap: 80px;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            font-weight: 700;
+            font-size: 150px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .time-section {
+            text-align: center;
+        }
+
+        .number {
+            display: block;
+            font-size: 150px;
+            line-height: 1;
+        }
+
+        .label {
+            font-size: 30px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .socials {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .socials img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+
+        .socials img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsywność */
+        @media (max-width: 768px) {
+            .custom-countdown {
+                font-size: 80px;
+            }
+
+            .socials img {
+                width: 60px;
+                height: 60px;
+            }
+	.date-text {
+    font-size: 100px; 
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px; 	
+        }
+    </style>
+</head>
+<body>
+	<div class="date-text">
+        11.04.2025
+    </div>
+	
+    <div class="custom-countdown" id="custom-countdown">
+        <div class="time-section">
+            <span class="number" id="days">00</span>
+            <span class="label">dni</span>
+        </div>
+        <div class="time-section">
+            <span class="number" id="hours">00</span>
+            <span class="label">godz</span>
+        </div>
+        <div class="time-section">
+            <span class="number" id="minutes">00</span>
+            <span class="label">min</span>
+        </div>
+        <div class="time-section">
+            <span class="number" id="seconds">00</span>
+            <span class="label">sek</span>
+        </div>
+    </div>
+
+    <div class="socials">
+        <a href="https://www.tiktok.com/@piiszdm" target="_blank">
+            <img src="Tik-Tok-Logo.png" alt="TikTok">
+        </a>
+        <a href="https://www.youtube.com/@ddmuss" target="_blank">
+            <img src="Youtube_logo.png" alt="YouTube">
+        </a>
+        <a href="https://www.instagram.com/piszdm" target="_blank">
+            <img src="Instagram_logo_2022.png" alt="Instagram">
+        </a>
+    </div>
+
+    <script>
+        const target = new Date("2025-04-11T16:00:00+02:00").getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = target - now;
+
+            if (distance <= 0) {
+                document.getElementById("custom-countdown").innerHTML = "<div>Zaczęło się!</div>";
+                clearInterval(timerInterval);
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = String(days).padStart(2, '0');
+            document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+            document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+        }
+
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
