@@ -21,7 +21,7 @@
         gap: 60px;
         box-sizing: border-box;
         text-align: center;
-	transform: translateY(-100px); /* Przesuwamy całość w górę */
+        transform: translateY(-100px); /* Przesuwamy całość w górę */
     }
 
     .custom-countdown {
@@ -153,14 +153,22 @@
     </div>
 
     <script>
-        const target = new Date("2025-04-11T16:00:00+02:00").getTime();
+        const target = new Date("2025-04-11T20:00:00+02:00").getTime();
 
         function updateTimer() {
             const now = new Date().getTime();
             const distance = target - now;
 
             if (distance <= 0) {
-                document.getElementById("custom-countdown").innerHTML = "<div>Zaczęło się!</div>";
+                document.getElementById("custom-countdown").innerHTML = `
+                    <a href="#" style="
+                        font-size: 60px;
+                        color: red;
+                        text-decoration: none;
+                        font-weight: bold;
+                    ">
+                        NASTAŁ CZAS
+                    </a>`;
                 clearInterval(timerInterval);
                 return;
             }
